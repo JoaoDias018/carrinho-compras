@@ -6,7 +6,7 @@ function adicionar(){
     let nomeProduto = produto.split('-')[0];
     let valorUnitario = produto.split('R$')[1];
     let quantidade = document.getElementById('quantidade').value;
-    if(validar(quantidade) == 'erro')
+    if(validar(quantidade, produto) == 'erro')
         return;
 
     let preco = quantidade * valorUnitario;
@@ -29,9 +29,14 @@ function limpar(){
 
 }
 
-function validar(quantidade){
-    if(quantidade == 0){
-        alert('Campo Qtde deve ser maior que 0');
+function validar(quantidade, produto){
+    if( isNaN(quantidade) || quantidade <= 0){
+        alert('Insira uma quantidade válida!');
         return 'erro';
     }
+    if(!produto || produto.trim() === ""){
+        alert('Selecione um produto válido!');
+        return 'erro';
+    }
+    return 'valido';
 }
